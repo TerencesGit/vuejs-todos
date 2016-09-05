@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Vue-todos</title>
+    <link rel="icon" href="images/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/app.css">
     <style>
     	[v-cloak]{
@@ -14,7 +15,7 @@
 
 <body>
     <div class="todoapp">
-    	<header>
+    	<header v-cloak>
     		<h1>vue-todos</h1>	
     		<input type="checkbox" class="toggle-all" v-model="allDone" v-show="todos.length">
     		<input type="text" class="newTodo" autofocus placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo">

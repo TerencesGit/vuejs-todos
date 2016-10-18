@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue-todos</title>
+    <link rel="icon" href="images/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+    	[v-cloak]{
+    		display: none
+    	}
+    </style>
+</head>
+
+<body>
+    <div class="todoapp">
+    	<header v-cloak>
+    		<h1>vue-todos</h1>	
+    		<input type="checkbox" class="toggle-all" v-model="allDone" v-show="todos.length">
+    		<input type="text" class="newTodo" autofocus placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo">
+    	</header>
+      <section class="main" v-cloak>
+      	<ul class="todolist">
+      		<li class="todo" v-for="todo in filteredTodos"
+      		:class="{completed: todo.completed, editing: todo == editedTodo}">
+      			<div class="view">
+      				<input type="checkbox" class="toggle" v-model="todo.completed">
+      				<label @dblclick="editTodo(todo)">{{todo.title}}</label>
+      				<button class="destroy" @click="removeTodo(todo)">&#10005;</button>
+      			</div>
+      			<input class="edit" v-model="todo.title"
+      			@blur="doneEdit(todo)"
+      			@keyup.enter="doneEdit(todo)"
+      			>
+      		</li>
+      	</ul>
+      </section>
+      <footer v-show="todos.length" v-cloak>
+      	<span class="todo-count">Completion rate &nbsp;{{completed}}/{{todos.length}}</span>
+      	<ul class="filters">
+      		<li><a href="#/all" :class="{selected: visibility == 'all'}">All</a></li>
+      		<li><a href="#/active" :class="{selected: visibility == 'active'}">Active</a></li>
+      		<li><a href="#/completed" :class="{selected: visibility == 'completed'}">Completed</a></li>
+      	</ul>
+      	<button class="clear-completed" @click="removeCompleted">Clear completed</button>
+      </footer>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/director.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/routes.js"></script>
+</body>
+
+</html>
